@@ -28,18 +28,6 @@ Third: Return the most common chunks.
 Fourth: Profit. Failing that, find a prophet to follow. First choice > second.
 """
 
-
-# to-dos:
-# 3. store NP chunks
-# 4. extract keywords based upon frequency
-
-
-"""First: Segment, tokenize, and tag, using the NLTK's resources."""
-
-# wrapped up in the below.
-
-"""Second: Chunk using predetermined patterns"""
-
 # set the patterns we want to look for
 patterns = """
     NP: {<JJ>*<NN>+}
@@ -63,32 +51,18 @@ NPChunker = nltk.RegexpParser(patterns)
 
 # this will parse the sentences, starting our NP identification process.
 def sentence_parser(input):
-    results = []
     sentences = nltk.sent_tokenize(input)
     sentences = [nltk.word_tokenize(sent) for sent in sentences]
     sentences = [nltk.pos_tag(sent) for sent in sentences]
+    sentences = [NPChunker.parse(sent) for sent in sentences]
     for sent in sentences:
-        result = NPChunker.parse(sent)
-        results.append(result)
-
+        tree = NPChunker.parse(sent)
+        for subtree in tree.subtrees():
+            if subtree.node == 'NP':
+                print subtree
 
 """Third: Return the most common chunks."""
 
 # a tree traversal function for extracting NP chunks in the parsed tree
 # so this will go through the results from sentence_parser and just pick out
 # the NP.
-
-
-def traverse(t):
-    cool_nps = []
-    try:
-        t.node
-    except AttributeError:
-        return
-    else:
-        if t.node == 'NP':
-            cool_nps.append(t)  # or do whatever else...think abt it. -lp
-        else:
-            for child in t:
-                traverse(child)
-    return cool_nps
