@@ -11,7 +11,7 @@ patterns = """
 NPChunker = nltk.RegexpParser(patterns)
 
 
-def sentence_parser(input):
+def sent_parse(input):
     sentences = nltk.sent_tokenize(input)
     sentences = [nltk.word_tokenize(sent) for sent in sentences]
     sentences = [nltk.pos_tag(sent) for sent in sentences]
@@ -37,11 +37,3 @@ def sentence_parser(input):
     vocabulary1 = fdist1.keys()
     vocabulary2 = fdist2.keys()
     return vocabulary1[:5], vocabulary2[:5]
-
-
-    # for tree in nps:
-    #     t = tree
-    #     t = t.leaves()
-    #     t = ''.join(word for word, tag in t.leaves())
-    #     nps_new.append(t)
-    # return nps_new
