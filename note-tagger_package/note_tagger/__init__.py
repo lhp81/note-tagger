@@ -1,0 +1,1 @@
+from note_tagger_app import application
