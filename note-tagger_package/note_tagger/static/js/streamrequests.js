@@ -6,9 +6,12 @@ $(document).ready(function(){
             url: "processnote",
             data: {'note': $('#noteentry').val()},
             type: "GET",
-            dataType: "text",
+            dataType: "json",
             success: function(data) {
-                $('#thestream').append("<br/><br/>"+data);
+                $('#thestream').append("<br/>");
+                for(var i=0; i<=data.length;i++){
+                    $('#thestream').append(data[i]+' ');
+                }
             }
         });
     });
