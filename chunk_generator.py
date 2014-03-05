@@ -60,10 +60,7 @@ def sentence_parser(input):
         tree = NPChunker.parse(sent)
         for subtree in tree.subtrees():
             if subtree.node == 'NP':
-                nps.append(subtree)
-    for np in nps:
-        nltk.tag.str2tuple(np)
-    return nps
+                print subtree
 
 """Third: Return the most common chunks."""
 
