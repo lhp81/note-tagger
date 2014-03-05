@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 
 import re
+from cgi import FieldStorage
 # import numpy
 # import nltk
 
@@ -17,8 +18,7 @@ def resolve_path(path):
         match = re.match(regexp, matchpath)
         if match is None:
             continue
-        args = match.groups([])
-        return func, args
+        return func
     # we get here if no url matches
     raise NameError
 
@@ -27,23 +27,32 @@ def submit():
     pass
 
 
-def main_page():
+def main_page(environ):
     with open('templates/note-tagger.html', 'r') as infile:
         return infile.read()
 
 
-def note_tagger():
-    return "Success"
+def note_tagger(environ):
+    # return "Success"
+    # return environ['wsgi.input']
+    # import pdb; pdb.set_trace()
+    # return environ.get('wsgi.input')
+    # return environ.get('PATH_INFO', None)
+    #
+    fs = FieldStorage(environ=environ)
+    return fs.getvalue('note')
+
 
 
 def application(environ, start_response):
     headers = [("Content-type", "text/html")]
+    # import pdb; pdb.set_trace()
     try:
         path = environ.get('PATH_INFO', None)
         if path is None:
             raise NameError
-        func, args = resolve_path(path)
-        body = func(*args)
+        func = resolve_path(path)
+        body = func(environ)
         status = "200 OK"
     except NameError:
         status = "404 Not Found"

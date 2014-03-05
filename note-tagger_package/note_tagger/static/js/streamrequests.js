@@ -4,8 +4,8 @@ $(document).ready(function(){
     $('#submitbutton').click(function(event){
         $.ajax({
             url: "processnote",
-            data: $(this).siblings('#noteentry').text(),
-            type: "POST",
+            data: {'note': $('#noteentry').val()},
+            type: "GET",
             dataType: "text",
             success: function(data) {
                 $('#thestream').append("<br/><br/>"+data);
