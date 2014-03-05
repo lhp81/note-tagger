@@ -31,17 +31,17 @@ Fourth: Profit. Failing that, find a prophet to follow. First choice > second.
 # set the patterns we want to look for
 patterns = """
     NP: {<JJ>*<NN>+}
-    {<JJ>*<NN*>?<NN>+}
-    {<NNP>+<NNPS>+}
-    {<NN>+<NNS>+}
-    {<NN>?<NNP>*<CD>}
-    {<NNP>+<NN>+}
-    {<NN>+<NN>+}
-    {<NNP>+<CD>+}
+        {<NNP>+}
+        {<NN>+}
     """
-    # {<NNP>+}
-    # {<NN>+}
 
+    # {<JJ>*<NN*>?<NN>+}
+    # {<NNP>+<NNPS>+}
+    # {<NN>+<NNS>+}
+    # {<NN>?<NNP>*<CD>}
+    # {<NNP>+<NN>+}
+    # {<NN>+<NN>+}
+    # {<NNP>+<CD>+}
 # the above needs to be extended after I can see real world results
 # may want to start using <NN*> as a choice.
 
@@ -55,11 +55,15 @@ def sentence_parser(input):
     sentences = [nltk.word_tokenize(sent) for sent in sentences]
     sentences = [nltk.pos_tag(sent) for sent in sentences]
     sentences = [NPChunker.parse(sent) for sent in sentences]
+    nps = []
     for sent in sentences:
         tree = NPChunker.parse(sent)
         for subtree in tree.subtrees():
             if subtree.node == 'NP':
-                print subtree
+                nps.append(subtree)
+    for np in nps:
+        nltk.tag.str2tuple(np)
+    return nps
 
 """Third: Return the most common chunks."""
 
