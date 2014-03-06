@@ -20,7 +20,7 @@ def prepare_text(input):
     (b) defines a parser that will look for those patterns
     (c) breaks the text into sentences and individual words.
     (d) tags each word for its part of speech
-    (e) uses my reexs and parser to label NP.
+    (e) uses my regexs and parser to label NP.
     """
 
     sentences = nltk.sent_tokenize(input)
