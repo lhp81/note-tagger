@@ -81,9 +81,11 @@ def category_chooser(nps):
                         your own and resubmit."
     return [category_tag]
 
+
 # this doesn't work yet.
-#########################
-# def do_it_all(input):
-#     prepare_text(input)
-#     parsed_text_to_NP(sentences)
-#     category_chooser(nps)
+##########################################
+# def sent_parse(input):
+#     sentences = prepare_text(input)
+#     nps = parsed_text_to_NP(sentences)
+#     category_tag = category_chooser(nps)
+#     print category_tag
