@@ -8,10 +8,11 @@ $(document).ready(function(){
             type: "GET",
             dataType: "json",
             success: function(data) {
-                $('#thestream').append("<br/>");
-                for(var i=0; i<data.length;i++){
-                    $('#thestream').append(data[i]+' ');
+                $('#thestream').append("<br/>Tags:");
+                for(var i=1; i<data.length;i++){
+                    $('#thestream').append(' '+data[i]);
                 }
+                $('#thestream').append(".<br/>"+data[0]);
             }
         });
     });
