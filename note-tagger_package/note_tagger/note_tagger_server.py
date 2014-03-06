@@ -1,6 +1,8 @@
 #! /usr/bin/env python
 
 import re
+from cgi import FieldStorage
+import json
 # import numpy
 # import nltk
 
@@ -10,35 +12,44 @@ import re
 
 
 def resolve_path(path):
-    urls = [(r'^$', note_tagger)]
+    urls = [(r'^$', main_page),
+            (r'^processnote$', note_tagger)]
     matchpath = path.lstrip('/')
     for regexp, func in urls:
         match = re.match(regexp, matchpath)
         if match is None:
             continue
-        args = match.groups([])
-        return func, args
+        return func
     # we get here if no url matches
     raise NameError
 
 
-def submit():
-    pass
-
-
-def note_tagger():
+def main_page(environ):
     with open('templates/note-tagger.html', 'r') as infile:
         return infile.read()
 
 
+def note_tagger(environ):
+    # return "Success"
+    #
+    # import pdb; pdb.set_trace()
+    #
+    fs = FieldStorage(environ=environ)
+    note = fs.getvalue('note')
+
+    nt_list = [note, 'tag1', 'tag2']
+    return json.dumps(nt_list)
+
+
 def application(environ, start_response):
     headers = [("Content-type", "text/html")]
+    # import pdb; pdb.set_trace()
     try:
         path = environ.get('PATH_INFO', None)
         if path is None:
             raise NameError
-        func, args = resolve_path(path)
-        body = func(*args)
+        func = resolve_path(path)
+        body = func(environ)
         status = "200 OK"
     except NameError:
         status = "404 Not Found"

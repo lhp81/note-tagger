@@ -144,8 +144,10 @@ def _sync_it():
     sudo('cp note-tagger_package/server_config/simple_nginx_config /etc/nginx/sites-available/default')
     sudo('cp note-tagger_package/server_config/note_tagger_gun.conf /etc/supervisor/conf.d/')
     sudo('mkdir /var/www; mkdir /var/www/note-tagger')
+    # sudo('ln -s note-tagger_package/note_tagger/static /var/www/note-tagger/')
     sudo('cp -r note-tagger_package/note_tagger/static /var/www/note-tagger/')
     sudo('cd note-tagger_package/ && python setup.py develop')
+
 
 
 def sync_it():
@@ -166,10 +168,13 @@ def install_dep():
 
 
 def _start_server():
-    sudo('/etc/init.d/nginx start')
+    sudo('service nginx start')
+    # sudo('/etc/init.d/nginx start')
     # sudo('unlink /run/supervisor.sock')
-    sudo('/etc/init.d/supervisor stop')
-    sudo('/etc/init.d/supervisor start')
+    sudo('service supervisor stop')
+    sudo('service supervisor start')
+    # sudo('/etc/init.d/supervisor stop')
+    # sudo('/etc/init.d/supervisor start')
 
 
 def start_server():
