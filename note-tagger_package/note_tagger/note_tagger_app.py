@@ -64,9 +64,9 @@ def category_chooser(nps):
     tech_counter = 0
     music_counter = 0
     for word in nps:
-        if word in tech_list:
+        if word.lower() in tech_list:
             tech_counter += 1
-        if word in music_list:
+        if word.lower() in music_list:
             music_counter += 1
     category_tag = None
     if tech_counter > music_counter:
