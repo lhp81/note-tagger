@@ -9,7 +9,7 @@ $(document).ready(function(){
             dataType: "json",
             success: function(data) {
                 $('#thestream').append("<br/>");
-                for(var i=0; i<=data.length;i++){
+                for(var i=0; i<data.length;i++){
                     $('#thestream').append(data[i]+' ');
                 }
             }
