@@ -10,6 +10,7 @@ patterns = """
     NP: {<JJ>*<NN>+}
         {<NNP>+}
         {<NN>+}
+        {<NN*>+}
     """
 
 NPChunker = nltk.RegexpParser(patterns)
