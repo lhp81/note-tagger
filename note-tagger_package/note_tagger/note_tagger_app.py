@@ -2,6 +2,7 @@
 
 import re
 from cgi import FieldStorage
+import json
 # import numpy
 # import nltk
 
@@ -23,10 +24,6 @@ def resolve_path(path):
     raise NameError
 
 
-def submit():
-    pass
-
-
 def main_page(environ):
     with open('templates/note-tagger.html', 'r') as infile:
         return infile.read()
@@ -34,13 +31,14 @@ def main_page(environ):
 
 def note_tagger(environ):
     # return "Success"
-    # return environ['wsgi.input']
-    # import pdb; pdb.set_trace()
-    # return environ.get('wsgi.input')
-    # return environ.get('PATH_INFO', None)
     #
-    fs = FieldStorage(environ=environ)
-    return fs.getvalue('note')
+    # import pdb; pdb.set_trace()
+    #
+    # fs = FieldStorage(environ=environ)
+    # return fs.getvalue('note')
+    #
+    nt_list = ['this is a note', 'tag1', 'tag2']
+    return json.dumps(nt_list)
 
 
 
