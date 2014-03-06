@@ -6,21 +6,31 @@ import tech_list
 import music_list
 
 
-patterns = """
-    NP: {<JJ>*<NN>+}
-        {<NNP>+}
-        {<NN>+}
-    """
+# patterns = """
+#     NP: {<JJ>*<NN>+}
+#         {<NNP>+}
+#         {<NN>+}
+#     """
 
-NPChunker = nltk.RegexpParser(patterns)
+# NPChunker = nltk.RegexpParser(patterns)
 
 def prepare_text(input):
+    """A function that:
+    (a) defines patterns of text that are NP
+    (b) defines a parser that will look for those patterns
+    (c) breaks the text into sentences and individual words.
+    (d) tags each word for its part of speech
+    (e) uses my reexs and parser to label NP.
+    """
+
     patterns = """
     NP: {<JJ>*<NN>+}
         {<NNP>+}
         {<NN>+}
     """
+
     NPChunker = nltk.RegexpParser(patterns)
+
     sentences = nltk.sent_tokenize(input)
     sentences = [nltk.word_tokenize(sent) for sent in sentences]
     sentences = [nltk.pos_tag(sent) for sent in sentences]
@@ -29,7 +39,9 @@ def prepare_text(input):
 
 
 def parsed_text_to_NP(sentences):
-
+    """A function that takes parsed sentences and extracts only the NP.
+       These NP are stripped of POS tags and stored in a list.
+    """
     nps = []
     for sent in sentences:
         tree = NPChunker.parse(sent)
@@ -38,21 +50,25 @@ def parsed_text_to_NP(sentences):
                 t = subtree
                 t = ' '.join(word for word, tag in t.leaves())
                 nps.append(t)
-# I think the following is unnecessary since we don't want a list of
-# keywords from the input. We can skip this, maybe, and instead just go
-# right into the checking NP against category keywords.
-# bigrams, unigrams, space = [], [], ' '
-# for word in nps:
-#     if space in word:
-#         bigrams.append(word)
-#     else:
-#         unigrams.append(word)
-# fdist1 = nltk.FreqDist(word.lower() for word in bigrams)
-# fdist2 = nltk.FreqDist(word.lower() for word in unigrams)
-# vocabulary1, vocabulary2 = fdist1.keys(), fdist2.keys()
+    return nps
+    # I think the following is unnecessary since we don't want a list of
+    # keywords from the input. We can skip this, maybe, and instead just go
+    # right into the checking NP against category keywords.
+    # bigrams, unigrams, space = [], [], ' '
+    # for word in nps:
+    #     if space in word:
+    #         bigrams.append(word)
+    #     else:
+    #         unigrams.append(word)
+    # fdist1 = nltk.FreqDist(word.lower() for word in bigrams)
+    # fdist2 = nltk.FreqDist(word.lower() for word in unigrams)
+    # vocabulary1, vocabulary2 = fdist1.keys(), fdist2.keys()
 
 
-def category_chooser(sentences):
+def category_chooser(nps):
+    """ A function that goes through the list of NP, comparing each NP to
+        category lists of keywords. This is done to determine which of the 
+    """
     tech_counter = 0
     music_counter = 0
     for word in nps:
@@ -63,6 +79,20 @@ def category_chooser(sentences):
     category_tag = None
     if tech_counter > music_counter:
         category_tag = 'Technology'
-    else:
+    elif tech_counter == music_counter:
+        category_tag = ('Music', 'Technology')
+    elif tech_counter < music_counter:
         category_tag = 'Music'
+    else:
+        category_tag = "Unable to find appropriate category. Please suggest \
+                        your own and resubmit."
     return [category_tag]
+
+def do_it_all(input):
+    prepare_text(input)
+    parsed_text_to_NP(sentences)
+    category_chooser(nps)
+    return [category_tag]
+
+if __name__ == __main__:
+    do_it_all(input)
