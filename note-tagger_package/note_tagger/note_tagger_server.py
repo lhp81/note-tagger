@@ -3,6 +3,7 @@
 import re
 from cgi import FieldStorage
 import json
+import note_tagger_app
 # import numpy
 # import nltk
 
@@ -36,8 +37,12 @@ def note_tagger(environ):
     #
     fs = FieldStorage(environ=environ)
     note = fs.getvalue('note')
-
-    nt_list = [note, 'tag1', 'tag2']
+    # note = '"""' + fs.getvalue('note') + '"""'
+    tag_list = note_tagger_app.sent_parse(note)
+    n_list = [note]
+    nt_list = n_list + tag_list
+    # note = fs.getvalue('note')
+    # nt_list = [note, 'tag1', 'tag2']
     return json.dumps(nt_list)
 
 
