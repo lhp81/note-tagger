@@ -34,12 +34,11 @@ def note_tagger(environ):
     #
     # import pdb; pdb.set_trace()
     #
-    # fs = FieldStorage(environ=environ)
-    # return fs.getvalue('note')
-    #
-    nt_list = ['this is a note', 'tag1', 'tag2']
-    return json.dumps(nt_list)
+    fs = FieldStorage(environ=environ)
+    note = fs.getvalue('note')
 
+    nt_list = [note, 'tag1', 'tag2']
+    return json.dumps(nt_list)
 
 
 def application(environ, start_response):
