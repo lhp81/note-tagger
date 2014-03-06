@@ -16,6 +16,7 @@ $(document).ready(function(){
                 $('#thestream').stop().animate({
                     scrollTop: $('#thestream')[0].scrollHeight
                 }, 800);
+                $('#thestream').value("");
             }
         });
     });
