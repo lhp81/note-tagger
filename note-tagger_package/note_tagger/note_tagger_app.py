@@ -64,9 +64,9 @@ def category_chooser(nps):
     tech_counter = 0
     music_counter = 0
     for word in nps:
-        if word in tech_list:
+        if word.lower() in tech_list:
             tech_counter += 1
-        if word in music_list:
+        if word.lower() in music_list:
             music_counter += 1
     category_tag = None
     if tech_counter > music_counter:
@@ -81,11 +81,9 @@ your own and resubmit."
     return [category_tag]
 
 
-# this now works
-#########################################
+
 def sent_parse(input):
     sentences = prepare_text(input)
     nps = parsed_text_to_NP(sentences)
     category_tag = category_chooser(nps)
     return category_tag
-########################################
