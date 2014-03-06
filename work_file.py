@@ -42,9 +42,9 @@ def sent_parse(input):
     for word in nps:
         if word in tech_list:
             tech_counter += 1
-    for word in nps:
-        if word in music_list:
-            music_counter += 1
+    # for word in nps:
+    #     if word in music_list:
+    #         music_counter += 1
     category_tag = None
     if tech_counter > music_counter:
         category_tag = 'Technology'
