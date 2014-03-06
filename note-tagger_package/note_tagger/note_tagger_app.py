@@ -50,4 +50,4 @@ def sent_parse(input):
         category_tag = 'Technology'
     else:
         category_tag = 'Music'
-    return [category_tag, (vocabulary1[:3], vocabulary2[:3])]
+    return [category_tag]
