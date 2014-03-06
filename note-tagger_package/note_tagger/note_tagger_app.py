@@ -22,7 +22,6 @@ def prepare_text(input):
     (d) tags each word for its part of speech
     (e) uses my regexs and parser to label NP.
     """
-
     sentences = nltk.sent_tokenize(input)
     sentences = [nltk.word_tokenize(sent) for sent in sentences]
     sentences = [nltk.pos_tag(sent) for sent in sentences]
@@ -83,9 +82,10 @@ def category_chooser(nps):
 
 
 # this doesn't work yet.
-##########################################
-# def sent_parse(input):
-#     sentences = prepare_text(input)
-#     nps = parsed_text_to_NP(sentences)
-#     category_tag = category_chooser(nps)
-#     print category_tag
+#########################################
+def sent_parse(input):
+    sentences = prepare_text(input)
+    nps = parsed_text_to_NP(sentences)
+    category_tag = category_chooser(nps)
+    print category_tag
+########################################
