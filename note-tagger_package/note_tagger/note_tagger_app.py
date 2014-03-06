@@ -2,17 +2,17 @@ import nltk
 # import re
 # import pprint
 from nltk import Tree
-import tech_list
-import music_list
+from tech_list import tech_list
+from music_list import music_list
 
 
-# patterns = """
-#     NP: {<JJ>*<NN>+}
-#         {<NNP>+}
-#         {<NN>+}
-#     """
+patterns = """
+    NP: {<JJ>*<NN>+}
+        {<NNP>+}
+        {<NN>+}
+    """
 
-# NPChunker = nltk.RegexpParser(patterns)
+NPChunker = nltk.RegexpParser(patterns)
 
 def prepare_text(input):
     """A function that:
@@ -22,14 +22,6 @@ def prepare_text(input):
     (d) tags each word for its part of speech
     (e) uses my reexs and parser to label NP.
     """
-
-    patterns = """
-    NP: {<JJ>*<NN>+}
-        {<NNP>+}
-        {<NN>+}
-    """
-
-    NPChunker = nltk.RegexpParser(patterns)
 
     sentences = nltk.sent_tokenize(input)
     sentences = [nltk.word_tokenize(sent) for sent in sentences]
@@ -88,11 +80,9 @@ def category_chooser(nps):
                         your own and resubmit."
     return [category_tag]
 
-def do_it_all(input):
-    prepare_text(input)
-    parsed_text_to_NP(sentences)
-    category_chooser(nps)
-    return [category_tag]
-
-if __name__ == __main__:
-    do_it_all(input)
+# this doesn't work yet.
+#########################
+# def do_it_all(input):
+#     prepare_text(input)
+#     parsed_text_to_NP(sentences)
+#     category_chooser(nps)
