@@ -34,8 +34,8 @@ def sent_parse(input):
             bigrams.append(word)
         else:
             unigrams.append(word)
-    fdist1 = FreqDist(word.lower() for word in bigrams)
-    fdist2 = FreqDist(word.lower() for word in unigrams)
+    fdist1 = nltk.FreqDist(word.lower() for word in bigrams)
+    fdist2 = nltk.FreqDist(word.lower() for word in unigrams)
     vocabulary1, vocabulary2 = fdist1.keys(), fdist2.keys()
     tech_counter = 0
     music_counter = 0
