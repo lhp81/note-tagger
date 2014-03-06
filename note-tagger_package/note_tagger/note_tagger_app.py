@@ -59,7 +59,8 @@ def parsed_text_to_NP(sentences):
 
 def category_chooser(nps):
     """ A function that goes through the list of NP, comparing each NP to
-        category lists of keywords. This is done to determine which of the 
+        category lists of keywords. This is done to determine which of the
+        category tags should be appended.
     """
     tech_counter = 0
     music_counter = 0
