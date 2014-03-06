@@ -81,7 +81,7 @@ your own and resubmit."
     return [category_tag]
 
 
-# this doesn't work yet.
+# this now works.
 #########################################
 def sent_parse(input):
     sentences = prepare_text(input)
