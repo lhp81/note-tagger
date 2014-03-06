@@ -140,13 +140,13 @@ def write_nginxconf():
 
 def _sync_it():
     rsync_project('/home/ubuntu/', 'note-tagger_package')
-    sudo('mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.orig')
-    sudo('cp note-tagger_package/server_config/simple_nginx_config /etc/nginx/sites-available/default')
-    sudo('cp note-tagger_package/server_config/note_tagger_gun.conf /etc/supervisor/conf.d/')
-    sudo('mkdir /var/www; mkdir /var/www/note-tagger')
+    # sudo('mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.orig')
+    # sudo('cp note-tagger_package/server_config/simple_nginx_config /etc/nginx/sites-available/default')
+    # sudo('cp note-tagger_package/server_config/note_tagger_gun.conf /etc/supervisor/conf.d/')
+    # sudo('mkdir /var/www; mkdir /var/www/note-tagger')
     # sudo('ln -s note-tagger_package/note_tagger/static /var/www/note-tagger/')
-    sudo('cp -r note-tagger_package/note_tagger/static /var/www/note-tagger/')
-    sudo('cd note-tagger_package/ && python setup.py develop')
+    # sudo('cp -r note-tagger_package/note_tagger/static /var/www/note-tagger/')
+    # sudo('cd note-tagger_package/ && python setup.py develop')
 
 
 
