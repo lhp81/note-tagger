@@ -71,13 +71,13 @@ def category_chooser(nps):
     category_tag = None
     if tech_counter > music_counter:
         category_tag = 'Technology'
-    elif tech_counter == music_counter:
+    elif (tech_counter == music_counter) and tech_counter != 0:
         category_tag = ('Music', 'Technology')
     elif tech_counter < music_counter:
         category_tag = 'Music'
     else:
         category_tag = "Unable to find appropriate category. Please suggest \
-                        your own and resubmit."
+your own and resubmit."
     return [category_tag]
 
 
@@ -87,5 +87,5 @@ def sent_parse(input):
     sentences = prepare_text(input)
     nps = parsed_text_to_NP(sentences)
     category_tag = category_chooser(nps)
-    print category_tag
+    return category_tag
 ########################################
