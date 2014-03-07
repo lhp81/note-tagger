@@ -1,5 +1,6 @@
 music_list = ['a cappella', 'accelerando', 'accessible', 'adagio', 'allegro',
-'atonal',
+'atonal', 'album', 'dj', 'techno', 'house', 'rap', 'rock', 'grunge', 'hip hop',
+'hip-hop', 'jazz' 'trumpet', 'piano', 'clarinet', 'verse', 'sing',
 'baroque', 'beat', 'cadence', 'cadenza', 'cadenza', 'canon', 'cantabile',
 'cantata', 'capriccio', 'carol', 'castrato', 'cavatina', 'chamber music',
 'chant', 'choir', 'chorale', 'chord', 'chord progression', 'chorus',
