@@ -45,19 +45,6 @@ def parsed_text_to_NP(sentences):
                 t = ' '.join(word for word, tag in t.leaves())
                 nps.append(t)
     return nps
-    # I think the following is unnecessary since we don't want a list of
-    # keywords from the input. We can skip this, maybe, and instead just go
-    # right into the checking NP against category keywords.
-    # 
-    # bigrams, unigrams, space = [], [], ' '
-    # for word in nps:
-    #     if space in word:
-    #         bigrams.append(word)
-    #     else:
-    #         unigrams.append(word)
-    # fdist1 = nltk.FreqDist(word.lower() for word in bigrams)
-    # fdist2 = nltk.FreqDist(word.lower() for word in unigrams)
-    # vocabulary1, vocabulary2 = fdist1.keys(), fdist2.keys()
 
 
 def category_chooser(nps):
