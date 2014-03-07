@@ -9,6 +9,23 @@ SENTENCES = """Four score and seven years ago, our fathers brought
             whether that nation, or any nation so conceived and so
             dedicated, can long endure."""
 
+TECH_SENTENCES = """If I were to buy something that I really want, it would
+                be an iPhone 5. I like Apple because the App Store offers more
+                apps than the Google Play Store. I think that Android is a good
+                operating system, but from my experience, iOS is just more
+                reliable. I like that you don't have to jailbreak Android,
+                but reliability, and the timet that it saves me, trumps the
+                ability to customize."""
+
+MUSIC_SENTENCES = """When I got back to Beijing from Scotland, my wife
+                    surprised me with tickets to an opera. I love classical
+                    music, going to the symphony, everything like that, so it
+                    was a good gift to give me. We heard a recital by the
+                    Korean opera singer Sumi Jo, who is fantastically talented.
+                    """
+
+
+
 class ChunkGeneratorConstituentsTest(unittest.TestCase):
     """ testing the various parts of the chunker"""
 
@@ -36,7 +53,19 @@ class ChunkGeneratorConstituentsTest(unittest.TestCase):
 
 class TestConstituentParts(unittest.TestCase):
     """testing the functions within my note_tagger_app script."""
-    pass
+    
+    def test_untaggable_text(self):
+        sentences = sent_parse(SENTENCES)
+        self.assertEqual(sentences, (["Unable to find appropriate category. "
+            "Please suggest your own and resubmit."]))
+
+    def test_tech_sentences(self):
+        sentences = sent_parse(TECH_SENTENCES)
+        self.assertEqual(sentences, ['Technology'])
+
+    def test_music_sentences(self):
+        sentences = sent_parse(MUSIC_SENTENCES)
+        self.assertEqual(sentences, ['Music'])
 
 
 if __name__ == '__main__':
