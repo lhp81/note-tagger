@@ -1,1 +1,1 @@
-from note_tagger_app import application
+from note_tagger_server import application

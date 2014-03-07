@@ -147,7 +147,9 @@ def _sync_it():
     # sudo('ln -s note-tagger_package/note_tagger/static /var/www/note-tagger/')
     sudo('cp -r note-tagger_package/note_tagger/static /var/www/note-tagger/')
     sudo('cd note-tagger_package/ && python setup.py develop')
-
+    # sudo('su www-data')
+    sudo('python note-tagger_package/nltk_dep.py')
+    # sudo('su ubuntu')
 
 
 def sync_it():
@@ -161,6 +163,7 @@ def _install_dep():
     sudo('apt-get -y install python-pip')
     sudo('apt-get -y install python-numpy')
     sudo('pip install nltk')
+
 
 
 def install_dep():
