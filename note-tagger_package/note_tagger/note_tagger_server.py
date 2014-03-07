@@ -35,8 +35,13 @@ def note_tagger(environ):
     #
     # import pdb; pdb.set_trace()
     #
-    fs = FieldStorage(environ=environ)
-    note = fs.getvalue('note')
+
+    # fs = FieldStorage(environ=environ)
+    # note = fs.getvalue('note')
+
+    #jack changing from GET to POST
+    note = environ['wsgi.input'].read(int(environ.get('CONTENT_LENGTH')))
+
     # note = '"""' + fs.getvalue('note') + '"""'
     tag_list = note_tagger_app.sent_parse(note)
     n_list = [note]
