@@ -148,9 +148,13 @@ def _sync_it():
     sudo('cp -r note-tagger_package/note_tagger/static /var/www/note-tagger/')
     sudo('cd note-tagger_package/ && python setup.py develop')
     # sudo('su www-data')
-    sudo('python note-tagger_package/nltk_dep.py')
+    #sudo('python note-tagger_package/nltk_dep.py')
     # sudo('su ubuntu')
 
+    #jack's attempt:
+    sudo('mkdir /usr/share/nltk_data')
+    sudo('python -m nltk.downloader -d /usr/share/nltk_data punkt')
+    sudo('python -m nltk.downloader -d /usr/share/nltk_data maxent_treebank_pos_tagger')
 
 def sync_it():
     run_command_on_selected_server(_sync_it)
