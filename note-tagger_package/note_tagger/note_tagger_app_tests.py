@@ -53,7 +53,7 @@ class ChunkGeneratorConstituentsTest(unittest.TestCase):
 
 class TestConstituentParts(unittest.TestCase):
     """testing the functions within my note_tagger_app script."""
-    
+
     def test_untaggable_text(self):
         sentences = sent_parse(SENTENCES)
         self.assertEqual(sentences, (["Unable to find appropriate category. "
